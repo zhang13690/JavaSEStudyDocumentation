@@ -74,4 +74,34 @@ Java学习文档
 
 # 3 搭建Java开发环境
 
+开发Java需要安装JDK，即Java开发工具(Java Development Kit)。JDK是整个Java的核心，包括了Java运行环境、Java工具和Java基础类库。
 
+## 3.2 安装JDK
+
+　　首先在Oracle官网https://www.oracle.com找到JDK下载页面。
+
+![](images/3-1.png)
+
+　　之后在Java SE的页面，点击下载的图标，出现下面界面，要按照图中所示操作，即接受协议再下载符合自己电脑的版本：
+
+![](images/3-2.png)
+
+　　下载完后，点击安装程序进行安装。安装时注意选择安装路径，路径中不要有空格和中文。安装时，把“公共JRE”这个组建去掉，不予安装，因为JDK中已经包含了JRE，不再需要额外的JRE。
+
+　　说明：JRE就是Java运行时环境(Java Runtime Environment)。JRE用于支持运行Java程序，包括JVM和运行Java程序需要的核心类库。如果只是使用Java应用的用户，则只要安装公共JRE即可。
+
+## 3.2 JDK安装目录介绍
+
+　　bin目录：存放Java编译器、解释器等工具。
+
+　　db目录：这里是JDK附带的一个轻量级数据库，名叫Derby。
+
+　　include目录：存放调用系统资源的接口文件。
+
+　　jre目录：存放Java运行环境文件。
+
+　　lib目录：存放Java类库文件。
+
+　　src.zip文件：是JDK Java类的源码。IDE会找到这个文件，以便在IDE中查看JDK源码。
+
+## 3.3 配置环境变量
