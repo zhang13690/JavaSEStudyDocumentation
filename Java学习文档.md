@@ -299,3 +299,155 @@ java 字节码文件名（不要加.class扩展名），例如：java Demo。
 　　3. 十六进制：以0x开头
 
 　　Java中也能使用转义字符。和C相同。
+
+## 5.3 数据类型转换
+
+　　1.自动类型转换（隐式）
+
+　　2.强制类型转换（显式）：(变量类型)变量名。注意可能会损失精度。
+
+　　3.boolean类型不能转换为其他的数据类型
+
+　　下面是例子：
+
+　　例1：
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        short a = 1;
+        a = a + 1; // 错误，因为a先加1，会自动转换成int类型
+        short b = 2;
+        b++; // 正确，其中隐含了一个强制转换
+    }
+}
+
+```
+
+　　例2：
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        byte b1 = 3, b2 = 4, b3;
+        b3 = b1 + b2; // 错误
+        /*
+        为什么byte b1 = 3不报错，而将两个byte相加再赋值给一个byte就会报错（仅限于byte类型）？
+        byte b1 = 3是正常的，因为3在byte范围内，赋值时直接将3作为byte类型给b1.
+        b3 = b1 + b2报错是 java 的机制导致的：
+        java在对byte类型运算时，会将其转换为int类型，两个int类型相加，赋值给byte类型肯定会报错的。
+         */
+
+        byte a = 3 + 4;
+        // 这个不报错。
+        // 3和4是常量，在编译时编译器就讲3+4解析成常量7赋值给变量a了。
+        // 7在byte范围内，直接赋值，这是编译器的优化。
+    }
+}
+
+```
+
+## 5.4 运算符
+
+　　（1）算术运算符：加减乘除、取余、自增自减。
+
+　　例1：符号+还能用于连接字符串。加法符号+是从左向右结合，只要符号左右两边不都是数字，就是连接字符串。语句System.out.println();用于输出信息。
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        System.out.println("hello"  + 'a' + 1);
+        System.out.println('a' + 1 + "hello");
+        System.out.println("5 + 5 = " + 5 + 5);
+        System.out.println(5 + 5 + " = 5 + 5");
+    }
+}
+
+```
+
+　　运行结果：
+
+```
+helloa1
+98hello
+5 + 5 = 55
+10 = 5 + 5
+```
+
+　　（2）取模后，结果的正负取决于被除数。利用取余，可以判断一个整数的奇偶等
+　　例2：取余结果的正负号。
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        System.out.println(-10 % 3);    // -1
+        System.out.println(10 % -3);    // 1
+        System.out.println(-10 % -3);   // -1
+    }
+}
+
+```
+
+　　例3：判断整数奇偶。
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        int num = 23;
+        if(num % 2 == 0) {
+            System.out.println(num + "是偶数");
+        } else {
+            System.out.println(num + "是奇数");
+        }
+    }
+}
+
+```
+
+　　例4：如果今天是星期五，那么1000天后是星期几？
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        int today = 5; // 今天周五
+        int after1000 = (today + 1000) % 7;
+        System.out.println("1000天后是周" + after1000);
+    }
+}
+
+```
+
+　　（3）赋值运算符=和复合运算符，比如sum += 1.
+
+　　（4）比较运算符的结果是boolean类型，只有true和false两种结果。例如等于==，不等于!=，大于>，小于<，大于等于>=和小于等于<=。
+
+　　（5）逻辑运算符：与（&和&&，&&是短路与），或（|和||，||是短路或），非（!）和异或（^，即左右两边表达式都为true或false时，结果为false，否则结果为true，即一个true一个false）
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        System.out.println( (5 > 3) ^ (4 > 2) );  // 表达式均为true，结果为false
+        System.out.println( (5 > 3) ^ (4 < 2) );  // 结果为true
+    }
+}
+
+```
+
+　　（6）位运算符。&、|和^除了可以作为逻辑运算符，也可以作为位运算符。位运算是对两个操作数中的每一个二进制位都进行运算。另外，~是取反操作，只有一个操作数。
+
+　　一个数异或同一个数两次，结果还是那个数，可以用这个规律进行数据的加密。
+
+　　（7）移位操作符：左移<<，右移>>，无符号右移>>>（被移位二进制最高位无论是0或者是1，空缺位都用0补）。
+
+　　左移：被移除的高位丢弃，右边空缺位补0。左移就相当于乘以2的位移位数次幂。右移相当于除以2的移动位数次幂。
+
+　　最有效率的方式算出2乘以8：2 << 3.
+
+　　右移：被移位的二进制最高位是0，右移后，空缺位补0；若最高位是1，空缺位补1。
+
+　　无符号右移：被移位二进制最高位无论是0或者是1，空缺位都用0补。
+
+　　（8）三元运算符
+
+　　（9）优先级。使用括号能改变优先级。
+
